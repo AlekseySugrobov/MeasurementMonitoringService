@@ -1,15 +1,19 @@
 package com.offsidegaming.measuremonitoringservice.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
  * Показания.
  */
 @Getter
+@Setter
 @Entity
 @Table(name = "measurements")
 public class Measurement {
@@ -23,9 +27,8 @@ public class Measurement {
     /**
      * Пользователь.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Column(name = "user_id")
+    private Long userId;
 
     /**
      * Тип измерения.
@@ -37,11 +40,11 @@ public class Measurement {
      * Значение.
      */
     @Column(name = "value", nullable = false)
-    private BigDecimal value;
+    private double value;
 
     /**
      * Дата подачи.
      */
-    @Column(name = "timestamp", nullable = false)
-    private LocalDateTime date;
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
 }

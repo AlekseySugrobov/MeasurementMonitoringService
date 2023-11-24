@@ -71,6 +71,9 @@ components:
           type: number
           format: double
           description: Значение измерения
+        date:
+          type: string
+          format: date
 
     MeasurementResponseDto:
       type: object
