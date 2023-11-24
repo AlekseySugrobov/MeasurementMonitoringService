@@ -17,6 +17,7 @@
 		<java.version>17</java.version>
 		<lombok.version>1.18.30</lombok.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
+		<podam.version>7.1.0.RELEASE</podam.version>
 		<plugin.openapi.version>6.3.0</plugin.openapi.version>
 		<plugin.maven-compiler.version>3.11.0</plugin.maven-compiler.version>
 	</properties>
@@ -72,9 +73,16 @@
 			<artifactId>hsqldb</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>uk.co.jemos.podam</groupId>
+			<artifactId>podam</artifactId>
+			<version>${podam.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

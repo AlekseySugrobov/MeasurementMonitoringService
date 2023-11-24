@@ -63,6 +63,7 @@ components:
       properties:
         userId:
           type: integer
+          format: int64
           description: ID пользователя
         type:
           type: string
@@ -83,6 +84,7 @@ components:
           description: Уникальный идентификатор измерения
         userId:
           type: integer
+          format: int64
           description: ID пользователя
         type:
           type: string
