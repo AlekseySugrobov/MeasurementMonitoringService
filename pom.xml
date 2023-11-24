@@ -20,6 +20,7 @@
 		<podam.version>7.1.0.RELEASE</podam.version>
 		<jaxws.version>2.3.1</jaxws.version>
 		<openapi.jackson.version>0.2.2</openapi.jackson.version>
+		<springdoc.version>2.2.0</springdoc.version>
 		<plugin.openapi.version>6.3.0</plugin.openapi.version>
 		<plugin.maven-compiler.version>3.11.0</plugin.maven-compiler.version>
 	</properties>
@@ -39,7 +40,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.2.0</version>
+			<version>${springdoc.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
