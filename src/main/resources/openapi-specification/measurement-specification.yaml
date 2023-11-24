@@ -1,0 +1,94 @@
+openapi: 3.0.0
+info:
+  title: Gas & Water Usage Monitoring API
+  description: API для мониторинга использования газа, холодной и горячей воды.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Локальный сервер разработки
+
+paths:
+  /measurements:
+    post:
+      tags:
+        - Measurement
+      summary: Отправка текущих измерений
+      description: Позволяет пользователю отправить текущие показания измерений.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeasurementInput'
+      responses:
+        '201':
+          description: Измерение успешно добавлено
+        '400':
+          description: Неверный запрос
+
+  /measurements/{userId}:
+    get:
+      tags:
+        - Measurement
+      summary: Получение истории измерений
+      description: Позволяет получить историю измерений для конкретного пользователя.
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+          description: Уникальный идентификатор пользователя
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Measurement'
+        '404':
+          description: Пользователь не найден
+
+components:
+  schemas:
+    MeasurementInput:
+      type: object
+      required:
+        - userId
+        - type
+        - value
+      properties:
+        userId:
+          type: integer
+          description: ID пользователя
+        type:
+          type: string
+          description: Тип измерения (например, GAS, COLD_WATER)
+        value:
+          type: number
+          format: double
+          description: Значение измерения
+
+    Measurement:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор измерения
+        userId:
+          type: integer
+          description: ID пользователя
+        type:
+          type: string
+          description: Тип измерения
+        value:
+          type: number
+          format: double
+          description: Значение измерения
+        timestamp:
+          type: string
+          format: date-time
+          description: Время проведения измерения
