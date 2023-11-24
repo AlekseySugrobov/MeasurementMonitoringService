@@ -1,6 +1,9 @@
 spring:
   application:
     name: measure-monitoring-service
+  jpa:
+    hibernate:
+      ddl-auto: validate
 
 management:
   endpoints:

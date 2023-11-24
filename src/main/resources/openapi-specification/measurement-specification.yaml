@@ -20,7 +20,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MeasurementInput'
+              $ref: '#/components/schemas/MeasurementInputDto'
       responses:
         '201':
           description: Измерение успешно добавлено
@@ -48,13 +48,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Measurement'
+                  $ref: '#/components/schemas/MeasurementResponseDto'
         '404':
           description: Пользователь не найден
 
 components:
   schemas:
-    MeasurementInput:
+    MeasurementInputDto:
       type: object
       required:
         - userId
@@ -72,7 +72,7 @@ components:
           format: double
           description: Значение измерения
 
-    Measurement:
+    MeasurementResponseDto:
       type: object
       properties:
         id:

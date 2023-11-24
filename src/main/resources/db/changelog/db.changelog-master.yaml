@@ -5,3 +5,6 @@ databaseChangeLog:
   - include:
       file: scripts/2.insert-measurement-types.yaml
       relativeToChangelogFile: true
+  - include:
+      file: scripts/3.insert-user.yaml
+      relativeToChangelogFile: true
