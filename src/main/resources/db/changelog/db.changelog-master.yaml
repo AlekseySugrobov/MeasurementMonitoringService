@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: scripts/1.create-tables.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: scripts/2.insert-measurement-types.yaml
+      relativeToChangelogFile: true

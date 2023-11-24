@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: measure-monitoring-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'health, env, info'

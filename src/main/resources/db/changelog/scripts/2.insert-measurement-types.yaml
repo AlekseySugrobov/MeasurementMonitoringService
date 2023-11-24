@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: asugrobov
+      changes:
+        - insert:
+            tableName: MEASUREMENT_TYPES
+            columns:
+              - column:
+                  name: code
+                  value: GAS
+        - insert:
+            tableName: MEASUREMENT_TYPES
+            columns:
+              - column:
+                  name: code
+                  value: COLD_WATER
+        - insert:
+            tableName: MEASUREMENT_TYPES
+            columns:
+              - column:
+                  name: code
+                  value: HOT_WATER

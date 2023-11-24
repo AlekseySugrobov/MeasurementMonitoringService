@@ -1,0 +1,92 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: asugrobov
+      changes:
+        - createTable:
+            tableName: USERS
+            columns:
+              - column:
+                  name: id
+                  type: INTEGER
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+        - createTable:
+            tableName: MEASUREMENT_TYPES
+            columns:
+              - column:
+                  name: code
+                  type: VARCHAR(50)
+                  constraints:
+                    primaryKey: true
+
+        - createTable:
+            tableName: MEASUREMENTS
+            columns:
+              - column:
+                  name: id
+                  type: INTEGER
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: measurement_type_name
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: value
+                  type: DECIMAL(10, 2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: timestamp
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: MEASUREMENTS
+            baseColumnNames: user_id
+            constraintName: fk_measurements_users
+            referencedTableName: USERS
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseTableName: MEASUREMENTS
+            baseColumnNames: measurement_type_name
+            constraintName: fk_measurements_types
+            referencedTableName: MEASUREMENT_TYPES
+            referencedColumnNames: code
+        - addUniqueConstraint:
+            tableName: MEASUREMENTS
+            columnNames: user_id, measurement_type_name, timestamp
+            constraintName: measurements_unique_user_type_timestamp
+
+        - createIndex:
+            tableName: Measurements
+            columns:
+              - column:
+                  name: user_id
+              - column:
+                  name: measurement_type_name
+            indexName: idx_measurements_user_type
+        - createIndex:
+            tableName: Measurements
+            columns:
+              - column:
+                  name: timestamp
+            indexName: idx_measurements_timestamp
