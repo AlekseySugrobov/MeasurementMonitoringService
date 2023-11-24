@@ -18,6 +18,8 @@
 		<lombok.version>1.18.30</lombok.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
 		<podam.version>7.1.0.RELEASE</podam.version>
+		<jaxws.version>2.3.1</jaxws.version>
+		<openapi.jackson.version>0.2.2</openapi.jackson.version>
 		<plugin.openapi.version>6.3.0</plugin.openapi.version>
 		<plugin.maven-compiler.version>3.11.0</plugin.maven-compiler.version>
 	</properties>
@@ -56,7 +58,7 @@
 		<dependency>
 			<groupId>org.openapitools</groupId>
 			<artifactId>jackson-databind-nullable</artifactId>
-			<version>0.2.2</version>
+			<version>${openapi.jackson.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.liquibase</groupId>
@@ -72,6 +74,11 @@
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.ws</groupId>
+			<artifactId>jaxws-api</artifactId>
+			<version>${jaxws.version}</version>
 		</dependency>
 
 		<dependency>

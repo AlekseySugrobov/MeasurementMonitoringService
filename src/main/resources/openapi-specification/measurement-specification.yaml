@@ -20,7 +20,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MeasurementInputDto'
+              $ref: '#/components/schemas/MeasurementDto'
       responses:
         '201':
           description: Измерение успешно добавлено
@@ -39,22 +39,35 @@ paths:
           required: true
           schema:
             type: integer
+            format: int64
           description: Уникальный идентификатор пользователя
+        - in: query
+          name: page
+          required: true
+          schema:
+            type: integer
+            default: 0
+          description: номер страницы
+        - in: query
+          name: size
+          required: true
+          schema:
+            type: integer
+            default: 10
+          description: размер страницы
       responses:
         '200':
           description: Успешный ответ
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/MeasurementResponseDto'
+                $ref: '#/components/schemas/MeasurementPageableResponseDto'
         '404':
           description: Пользователь не найден
 
 components:
   schemas:
-    MeasurementInputDto:
+    MeasurementDto:
       type: object
       required:
         - userId
@@ -71,29 +84,21 @@ components:
         value:
           type: number
           format: double
+          minimum: 0
           description: Значение измерения
         date:
           type: string
           format: date
 
-    MeasurementResponseDto:
+    MeasurementPageableResponseDto:
       type: object
       properties:
-        id:
-          type: integer
-          description: Уникальный идентификатор измерения
-        userId:
+        total:
           type: integer
           format: int64
-          description: ID пользователя
-        type:
-          type: string
-          description: Тип измерения
-        value:
-          type: number
-          format: double
-          description: Значение измерения
-        timestamp:
-          type: string
-          format: date-time
-          description: Время проведения измерения
+          description: общее количестве элементов
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeasurementDto'
+

@@ -4,9 +4,11 @@ import com.offsidegaming.measuremonitoringservice.domain.dto.ErrorDto;
 import com.offsidegaming.measuremonitoringservice.exceptions.MeasurementConflictException;
 import com.offsidegaming.measuremonitoringservice.exceptions.UnknownMeasurementTypeException;
 import com.offsidegaming.measuremonitoringservice.exceptions.UnknownUserIdException;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -27,6 +29,16 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(value = UnknownUserIdException.class)
     public ResponseEntity<ErrorDto> handleUnknownUserIdException(UnknownUserIdException exception) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(this.logAndConvertException(exception));
+    }
+
+    @ExceptionHandler(value = ConstraintViolationException.class)
+    public ResponseEntity<ErrorDto> handleConstraintViolationException(ConstraintViolationException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(this.logAndConvertException(exception));
+    }
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorDto> handleException(MethodArgumentNotValidException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(this.logAndConvertException(exception));
     }
 
     private ErrorDto logAndConvertException(Exception exception) {
